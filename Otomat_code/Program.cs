@@ -13,6 +13,13 @@ namespace Otomat_code
         int n_status;
         int[] final_status;
 
+        int n_symbols
+        {
+            get
+            {
+                return language.Length;
+            }
+        }
         public void readDFA()
         {
             var fileStream = new FileStream("data/TextFile1.txt", FileMode.Open, FileAccess.Read);
@@ -80,7 +87,7 @@ namespace Otomat_code
             Console.Write("\n");
             for (int j = 0; j < n_status; j++)
             {
-                Console.Write(j+" ");
+                Console.Write(j + " ");
                 for (int i = 0; i < language.Length; i++)
                 {
                     Console.Write(dfa[i, j] + " ");
