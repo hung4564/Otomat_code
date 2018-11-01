@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Otomat_code
 {
@@ -11,7 +12,8 @@ namespace Otomat_code
         static void Main(string[] args)
         {
             var dfa = new DFA();
-            dfa.readDFA("data/TextFile1.txt");
+            string filePath = "TextFile1.txt";
+            dfa.readDFA(filePath);
             dfa.minimizationDFA().writerDFA();
             Console.ReadKey();
         }

@@ -89,34 +89,38 @@ namespace Otomat_code
             using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
             {
                 string line;
-                //doc bang chu cai
                 line = streamReader.ReadLine();
-                _language = readline(line).ToList();
-                //doc so ham trang thai
-                line = streamReader.ReadLine();
-                _n_states = Int32.Parse(readline(line)[0]);
-                //doc cac ham trang thai ket thuc
-                line = streamReader.ReadLine();
-                _final_states = Array.ConvertAll(readline(line), int.Parse).ToList();
-                //doc cac ham trang thai
-                string[] q;
-                int states_start;
-                string char_get;
-                int index_char;
-                int states_end;
-                _transitionsTable = new int[_language.Count, _n_states];
-                while ((line = streamReader.ReadLine()) != null)
+                if (line != null)
                 {
-                    q = readline(line);
-                    if (q != null && q.Length >= 3)
+                    //doc bang chu cai
+                    _language = readline(line).ToList();
+                    //doc so ham trang thai
+                    line = streamReader.ReadLine();
+                    _n_states = Int32.Parse(readline(line)[0]);
+                    //doc cac ham trang thai ket thuc
+                    line = streamReader.ReadLine();
+                    _final_states = Array.ConvertAll(readline(line), int.Parse).ToList();
+                    //doc cac ham trang thai
+                    string[] q;
+                    int states_start;
+                    string char_get;
+                    int index_char;
+                    int states_end;
+                    _transitionsTable = new int[_language.Count, _n_states];
+                    while ((line = streamReader.ReadLine()) != null)
                     {
-                        states_start = Int32.Parse(q[0]);
-                        char_get = q[1];
-                        index_char = _language.IndexOf(char_get);
-                        states_end = Int32.Parse(q[2]);
-                        _transitionsTable[index_char, states_start] = states_end;
+                        q = readline(line);
+                        if (q != null && q.Length >= 3)
+                        {
+                            states_start = Int32.Parse(q[0]);
+                            char_get = q[1];
+                            index_char = _language.IndexOf(char_get);
+                            states_end = Int32.Parse(q[2]);
+                            _transitionsTable[index_char, states_start] = states_end;
+                        }
                     }
                 }
+
             }
         }
         public string[] readline(string line)
@@ -274,7 +278,7 @@ namespace Otomat_code
             List<int> newfinal_states = new List<int>();
             for (int j = 0; j < new_n_states; j++)
             {
-                if (ListCheck(P[j], final_states))
+                if (P[j].Intersect(final_states).Any())
                 {
                     if (!newfinal_states.Contains(j))
                     {
@@ -314,18 +318,6 @@ namespace Otomat_code
             }
 
             return new DFA(new_n_states, language, newtransitionsTable, newfinal_states);
-        }
-        private bool ListCheck<T>(IEnumerable<T> l1, IEnumerable<T> l2)
-        {
-            // TODO: Null parm checks
-            if (l1.Intersect(l2).Any())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 
