@@ -11,10 +11,13 @@ namespace Otomat_code
 
         static void Main(string[] args)
         {
-            var dfa = new DFA();
             string filePath = "TextFile1.txt";
-            dfa.readDFA(filePath);
-            dfa.minimizationDFA().writerDFA();
+            //var dfa = FileReader.readDFA(filePath);
+            //dfa.minimizationDFA().writerDFA();
+            filePath = "NFA_1.txt";
+            var nfa = FileReader.readNFA(filePath);
+            nfa.writerNFA();
+            nfa.convertToDFA().writerDFA();
             Console.ReadKey();
         }
     }
