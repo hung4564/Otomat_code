@@ -108,6 +108,7 @@ namespace Otomat_code
                 }
                 Console.Write("\n");
             }
+            Console.Write("\n");
         }
         public List<int> getReachable_states()
         {

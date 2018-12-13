@@ -70,6 +70,7 @@ namespace Otomat_code
                 }
                 Console.Write("\n");
             }
+            Console.Write("\n");
         }
         public DFA convertToDFA()
         {
@@ -155,6 +156,35 @@ namespace Otomat_code
             }
 
             return new DFA(new_n_states, new_language, newtransitionsTable, newfinal_states);
+        }
+        public Grammar conventToGrammar()
+        {
+            var temp = new Grammar();
+            //tap trang thai ket thuc la bang ngon ngu ben NFA
+            temp.Vt = this._language;
+            //tap trang thai bien la cac trang thai ben NFA, do la day so nen can chuyen sang chuoi.
+            temp.Vn = this.states.ConvertAll<string>(x => Convert.ToChar(x + 65).ToString());
+            temp.S = Convert.ToChar(this.start_states + 65).ToString();
+            for (int j = 0; j < _n_states; j++)
+            {
+                Console.Write(j + " ");
+                for (int i = 0; i < _language.Count; i++)
+                {
+                    if (_transitionsTable[i, j] != null)
+                    {
+                        string combindedString = string.Join(",", _transitionsTable[i, j].ToArray());
+                        foreach (var item in _transitionsTable[i, j])
+                        {
+                            var vecto = new Vector();
+                            vecto.start_states = Convert.ToChar(j + 65).ToString();
+                            vecto.parameter = this._language[i];
+                            vecto.end_states = Convert.ToChar(item + 65).ToString();
+                            temp.P.Add(vecto);
+                        }
+                    }
+                }
+            }
+            return temp;
         }
     }
 }

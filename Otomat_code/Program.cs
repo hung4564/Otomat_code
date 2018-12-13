@@ -17,7 +17,7 @@ namespace Otomat_code
             filePath = "NFA_1.txt";
             var nfa = FileReader.readNFA(filePath);
             nfa.writerNFA();
-            nfa.convertToDFA().writerDFA();
+            nfa.conventToGrammar().wrireGrammar();
             Console.ReadKey();
         }
     }
