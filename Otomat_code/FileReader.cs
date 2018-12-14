@@ -114,6 +114,53 @@ namespace Otomat_code
             }
             return new NFA(_n_states, _language, _transitionsTable, _final_states);
         }
+
+        static public Grammar readGrammar(string path)
+        {
+            var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+            var grammar = new Grammar();
+            List<int>[,] _transitionsTable = new List<int>[0, 0];
+            List<string> _language = new List<string>();
+            List<int> _final_states = new List<int>();
+            using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            {
+                string line;
+                line = streamReader.ReadLine();
+                if (line != null)
+                {
+                    //doc bang vt
+                    grammar.Vt = readline(line).ToList();
+                    //doc bang vn
+                    line = streamReader.ReadLine();
+                    grammar.Vn = readline(line).ToList();
+                    //doc chu cai bat dau
+                    line = streamReader.ReadLine();
+                    grammar.S = readline(line)[0];
+                    //doc cac ham trang thai
+                    List<string> q;
+                    while ((line = streamReader.ReadLine()) != null)
+                    {
+                        q = readline(line);
+                        if (q != null && q.Count >= 2)
+                        {
+                            var start_states = q[0];
+                            Vector temp = new Vector();
+                            temp.start_states = start_states;
+                            q.RemoveAt(0);
+                            temp.end_states = q[q.Count - 1];
+                            q.RemoveAt(q.Count - 1);
+                            if (q.Count > 0)
+                            {
+                                temp.parameter = q;
+                            }
+                            grammar.P.Add(temp);
+                        }
+                    }
+                }
+
+            }
+            return grammar;
+        }
     }
 
 }

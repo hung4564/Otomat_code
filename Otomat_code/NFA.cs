@@ -26,6 +26,14 @@ namespace Otomat_code
                 return this._start_states;
             }
         }
+        public NFA()
+        {
+            this._n_states = 0;
+            this._language = new List<string>();
+            this._transitionsTable = new List<int>[0, 0];
+            this._start_states = 0;
+            this._final_states = new List<int>();
+        }
         public NFA(int n_states, List<string> language, List<int>[,] transitionsTable, List<int> final_states, int start_states = 0)
         {
             this._n_states = n_states;
@@ -65,7 +73,7 @@ namespace Otomat_code
                     }
                     else
                     {
-                        Console.Write("e");
+                        Console.Write("e ");
                     }
                 }
                 Console.Write("\n");
@@ -167,7 +175,6 @@ namespace Otomat_code
             temp.S = Convert.ToChar(this.start_states + 65).ToString();
             for (int j = 0; j < _n_states; j++)
             {
-                Console.Write(j + " ");
                 for (int i = 0; i < _language.Count; i++)
                 {
                     if (_transitionsTable[i, j] != null)
@@ -177,7 +184,7 @@ namespace Otomat_code
                         {
                             var vecto = new Vector();
                             vecto.start_states = Convert.ToChar(j + 65).ToString();
-                            vecto.parameter = this._language[i];
+                            vecto.parameter = new List<string>() { this._language[i] };
                             vecto.end_states = Convert.ToChar(item + 65).ToString();
                             temp.P.Add(vecto);
                         }

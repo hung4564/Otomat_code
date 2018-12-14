@@ -1,9 +1,10 @@
 ﻿a b   #cac chu cai trong Vt
-A S   #cac chu cai trong Vn
+S A B  #cac chu cai trong Vn
 S   #chu cai bat dau
-#cac luat sinh ben duoi sau se co dang A -> b_1b_2...b_n(B)
+#cac luat sinh ben duoi sau se co dang A -> b_1b_2...b_n(B), chi tuyen tinh phai, ep cho epsilon
 S a A
-S b a
-A a A
-A a b S
+S b B
+B a A
 A b
+A b b B
+A ep

@@ -7,11 +7,16 @@ namespace Otomat_code
     class Vector
     {
         public string start_states;
+        public List<string> parameter;
         public string end_states;
-        public string parameter;
         public override string ToString()
         {
-            return start_states + " ->" + parameter + "" + end_states;
+            string combindedString = string.Join("", parameter.ToArray());
+            return start_states + " -> " + combindedString + " " + end_states;
+        }
+        public Vector()
+        {
+            this.parameter = new List<string>();
         }
     }
 }
