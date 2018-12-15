@@ -112,7 +112,7 @@ namespace Otomat_code
                 }
 
             }
-            return new NFA(_n_states, _language, _transitionsTable, _final_states);
+            return new NFA(_n_states, _language, _transitionsTable, _final_states, 0);
         }
 
         static public Grammar readGrammar(string path)
