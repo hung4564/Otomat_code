@@ -73,13 +73,11 @@ namespace Otomat_code
         }
         public void writerNFA()
         {
-
             string temp = string.Join(",", _language.ToArray());
             Console.WriteLine(temp);
             Console.WriteLine(_n_states.ToString());
             temp = string.Join(",", _final_states.ToArray());
             Console.WriteLine(temp);
-            Console.Write("\n  ");
             for (int i = 0; i < _language.Count; i++)
             {
                 Console.Write(_language[i] + " ");
@@ -121,7 +119,7 @@ namespace Otomat_code
                 // lấy ra các trạng thái mới chưa kiểm tra và hàm chuyển mới
                 List<int> state_check = temp_new_states[i];
                 List<int> new_state = new List<int>();
-                // hàm chuyển tương ứng với trạng thái đang kiểm tra, khởi tạo bằng -1 => trỏ tới trạng thái giếng
+                // hàm chuyển tương ứng với trạng thái đang kiểm tra, khởi tạo bằng -1
                 int[] temp_line = new int[new_language.Count];
                 for (int j = 0; j < new_language.Count; j++)
                 {

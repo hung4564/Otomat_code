@@ -74,18 +74,12 @@ namespace Otomat_code
 
         public void writerDFA()
         {
-            foreach (string temp in _language)
-            {
-                Console.Write(temp);
-            }
-            Console.Write("\n");
-            Console.WriteLine(_n_states.ToString());
-            foreach (int temp in _final_states)
-            {
-                Console.Write(temp +" ");
-            }
 
-            Console.Write("\n  ");
+            string temp = string.Join(",", _language.ToArray());
+            Console.WriteLine(temp);
+            Console.WriteLine(_n_states.ToString());
+            temp = string.Join(",", _final_states.ToArray());
+            Console.WriteLine(temp);
             for (int i = 0; i < _language.Count; i++)
             {
                 Console.Write(_language[i] + " ");

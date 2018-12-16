@@ -22,7 +22,7 @@ namespace Otomat_code
             //grammar.wrireGrammar();
             //Console.WriteLine("convent");
             //grammar.conventToNFA().writerNFA();
-            string reg = "(a|b)*ab";
+            string reg = "01";
             RegexParser myRegexParser = new RegexParser();
             myRegexParser.Init(reg);
             // Creating a parse tree with the preprocessed regex
@@ -34,9 +34,10 @@ namespace Otomat_code
             {
                 Console.WriteLine("Parse error: unexpected char, got {0} at #{1}", myRegexParser.Peek(), myRegexParser.GetPos());
             }
-            var lang = new List<string>() { "a", "b" };
             RegexParser.PrintTree(parseTree, 1);
-            NFA.TreeToNFA(parseTree, lang).writerNFA();
+            var nFA = NFA.TreeToNFA(parseTree, myRegexParser.language);
+            nFA.writerNFA();
+            nFA.convertToDFA().writerDFA();
             Console.ReadKey();
         }
     }

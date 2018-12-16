@@ -8,16 +8,36 @@ namespace Otomat_code
     {
         public string data;
         public int next;
+        private List<string> _language;
+        public List<string> language
+        {
+            get
+            {
+                return this._language;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="data"></param>
         public void Init(string data)
         {
+            _language = getLanguage(data);
             this.data = Preprocess(data);
             next = 0;
         }
-
+        private List<string> getLanguage(string data)
+        {
+            List<string> temp = new List<string>();
+            foreach (char c in data)
+            {
+                if (char.IsLetterOrDigit(c) && temp.Find(x => x.Contains(c.ToString())) == null)
+                {
+                    temp.Add(c.ToString());
+                }
+            }
+            return temp;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -55,7 +75,7 @@ namespace Otomat_code
         /// </summary>
         /// <param name="in"></param>
         /// <returns></returns>
-        public string Preprocess(string @in)
+        private string Preprocess(string @in)
         {
             StringBuilder @out = new StringBuilder();
 
@@ -69,7 +89,6 @@ namespace Otomat_code
             while (up.MoveNext())
             {
                 c.MoveNext();
-
                 @out.Append(c.Current);
 
                 if ((char.IsLetterOrDigit(c.Current) || c.Current == ')' || c.Current == '*' ||
